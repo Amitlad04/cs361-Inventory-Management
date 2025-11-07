@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import express from 'express';
-//import cors from 'cors';
 import asyncHandler from 'express-async-handler';
 import * as itemModel from './model.mjs';
 
@@ -8,7 +7,6 @@ import * as itemModel from './model.mjs';
 const PORT = process.env.PORT;
 
 const app = express();
-//app.use(cors());
 app.use(express.json());
 
 app.post('/items', asyncHandler(async(req, res) => {

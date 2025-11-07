@@ -23,8 +23,6 @@ const itemsSchema = mongoose.Schema ({
     amount: {type: Number, required: true},
 })
 
-//itemsSchema.index({ name: 1 }); // this is optional
-
 Item = mongoose.model('Item', itemsSchema);
 
 const createItem = async (sku, name, date, amount) => {
