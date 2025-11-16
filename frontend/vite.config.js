@@ -9,6 +9,11 @@ export default defineConfig({
       '/items': {
         target: 'http://localhost:3000',  
         changeOrigin: true,
+      },
+      '/auth': {
+        target: 'http://localhost:33445',
+        changeOrigin: true,
+        secure: false
       }
     }
   }

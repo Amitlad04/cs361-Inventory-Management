@@ -60,7 +60,17 @@ body {
   list-style: none;
   display: flex;
   gap: 32px;
+  font-size: large;
 }
+
+.li {
+  margin-top: 1.5%;
+}
+
+.li a:hover {
+  background-color: #b8b8b8;
+}
+
 
 .nav-item a {
   text-decoration: none;
@@ -216,5 +226,76 @@ body {
 
 .info-icon {
   font-size: 25px;
+  cursor: pointer;
+}
+
+.loginform {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin: 50px auto;
+  font-size: 30px;
+}
+
+.loginbtn {
+  padding: 12px 36px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(158, 158, 158, 0.3);
+}
+
+.loginh1 {
+  text-align: center;
+  margin-top: 5%;
+  text-decoration: underline;
+  font-size: 50px;
+}
+
+.loginh2 {
+  text-align: center;
+}
+
+.regbtn {
+  justify-content: center;
+  padding: 12px 36px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(158, 158, 158, 0.3);
+  
+}
+
+.regbtn-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2%;
+}
+
+.registerlink {
+  text-align: center;
+  font-size: large;
+}
+
+.logoutbtn {
+  height: 40px;
+  padding: 0 28px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background-color: #fff;
   cursor: pointer;
 }
