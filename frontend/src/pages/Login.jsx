@@ -1,14 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login({handleLogin}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [quote, setQuote] = useState("");
+    const [author, setAuthor] = useState("");
+
+    useEffect(() => {
+        getQuote();
+    }, []);
+
+
+
+    const getQuote = async () => {
+        const response = await fetch(
+            `/get/quote`, 
+            {
+              method: 'GET',
+              headers: {'Content-Type': 'application/json'}
+            },
+        );
+        const data = await response.json();
+    
+    
+        if (response.status === 200) {
+          console.log("Successfully fetched quote.");
+            setQuote(data.quote.quote);
+            setAuthor(data.quote.author)
+        } else {
+            console.log("Failed to fetch quote: " + response.status);
+        }
+    }
 
     const loggedIn = async (e) => {
         e.preventDefault();
-
         await handleLogin(username, password);
     };
 
@@ -44,8 +71,12 @@ function Login({handleLogin}) {
                     <button className="regbtn" type="button">Register</button>
                 </Link>
             </div>
+            <div className="quote-container">
+                <p className="quote-text">{quote}</p>
+                <p className="quote-author">- {author}</p>
+                <button onClick={getQuote} className="genQuote">Generate New Quote</button>
+            </div>
         </div>
-
     )
 }
 

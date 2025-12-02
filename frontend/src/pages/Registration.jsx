@@ -12,6 +12,12 @@ function Register({ handleRegister }) {
     await handleRegister(username, password);
   };
 
+  const generatePassword = async () => {
+    const response = await fetch('/pw', { method: 'POST' });
+    const data = await response.json();
+    setPassword(data.pw); 
+  };
+
   return (
     <div className="register-page">
       <h2 className="loginh1">Create an Account</h2>
@@ -40,6 +46,9 @@ function Register({ handleRegister }) {
         </label>
         <button className="loginbtn" type="submit">Register</button>
       </form>
+      <div className="pass-gen">
+        <button className="pass-gen-btn" type="button" onClick={generatePassword}>Generate Password</button>
+      </div>
       <div>
         <p className="registerlink">Already have an account? <Link to="/login">Login here</Link></p>
       </div>

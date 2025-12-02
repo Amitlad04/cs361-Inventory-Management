@@ -2,12 +2,34 @@ import 'dotenv/config';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import * as itemModel from './model.mjs';
-
+import fs from "fs";
+import path from "path";
 
 const PORT = process.env.PORT;
 
 const app = express();
 app.use(express.json());
+
+const EMAIL_FILE = path.join(process.cwd(), "email-service.txt");
+
+// Write command to microservice
+function writeToEmailService(message) {
+    fs.writeFileSync(EMAIL_FILE, message);
+  }
+  
+// Read microservice response
+function readFromEmailService() {
+    return new Promise(resolve => {
+        const interval = setInterval(() => {
+        const data = fs.readFileSync(EMAIL_FILE, "utf8").trim();
+        if (data !== "" && !data.startsWith("send:")) {
+            clearInterval(interval);
+            fs.writeFileSync(EMAIL_FILE, "");
+            resolve(data);
+        }
+        }, 200);
+    });
+}
 
 app.post('/items', asyncHandler(async(req, res) => {
     const { sku, name, date, amount } = req.body;
@@ -20,7 +42,17 @@ app.post('/items', asyncHandler(async(req, res) => {
     }
 
     const items = await itemModel.createItem(sku, name, date, amount);
-    res.status(201).json(items);
+
+    //email message
+    const emailMessage = `New item added: ${name} (SKU: ${sku}, Qty: ${amount})`;
+
+    writeToEmailService(`send:${emailMessage}`);
+
+    const response = await readFromEmailService();
+
+    console.log("Email Service Response:", response);
+
+    res.status(201).json({items});
 }));
 
 app.get('/items', asyncHandler(async(req, res) => {

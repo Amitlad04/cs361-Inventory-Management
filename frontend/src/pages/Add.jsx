@@ -20,11 +20,12 @@ function Add() {
             }
         )
         if(response.status === 201) {
-            alert("Successfully created a new item!")
+            alert("Successfully created a new item!");
+            navigate('/');
         } else {
-            alert("Failed to create a new item, status code " + response.status)
+            alert("Failed to create a new item, status code " + response.status);
         }
-        navigate('/')
+        //navigate('/')
     }
 
     return (

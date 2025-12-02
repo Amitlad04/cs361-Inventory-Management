@@ -41,7 +41,7 @@ async function findItemBySku(sku) {
 }
 
 async function deleteItemBySku(sku) {
-    const result = await Item.deleteOne({sku});
+    const result = await Item.deleteOne({ sku: String(sku) });
     return result.deletedCount > 0;
 }
 

@@ -14,6 +14,14 @@ export default defineConfig({
         target: 'http://localhost:33445',
         changeOrigin: true,
         secure: false
+      },
+      '/get/quote': {
+        target: 'http://localhost:55443',
+        changeOrigin: true
+      },
+      '/pw': {
+        target: 'http://localhost:34567',
+        changeOrigin: true
       }
     }
   }
